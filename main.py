@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 import random
 import os
 from tkinter import simpledialog
@@ -6,23 +6,23 @@ from tkinter import simpledialog
 pygame.init()
 
 relogio = pygame.time.Clock()
-icone  = pygame.image.load("assets/icone.png")
-iron = pygame.image.load("assets/iron.png")
-fundo = pygame.image.load("assets/fundo.png")
-fundoStart = pygame.image.load("assets/fundoStart.png")
-fundoDead = pygame.image.load("assets/fundoDead.png")
+icone  = pygame.image.load("recursos/iconePidao.png")
+personagem = pygame.image.load("recursos/homemPidao.png")
+fundo = pygame.image.load("recursos/florestaPidona.png")
+fundoStart = pygame.image.load("recursos/comecoPidao.png")
+fundoDead = pygame.image.load("recursos/final.png")
 
-missel = pygame.image.load("assets/missile.png")
+missel = pygame.image.load("recursos/lua.png")
 tamanho = (800,600)
 tela = pygame.display.set_mode( tamanho ) 
-pygame.display.set_caption("Iron Man do Marcão")
+pygame.display.set_caption("A Jornada Pidona")
 pygame.display.set_icon(icone)
-missileSound = pygame.mixer.Sound("assets/missile.wav")
-explosaoSound = pygame.mixer.Sound("assets/explosao.wav")
+missileSound = pygame.mixer.Sound("recursos/missile.wav")
+explosaoSound = pygame.mixer.Sound("recursos/explosao.wav")
 fonte = pygame.font.SysFont("comicsans",28)
 fonteStart = pygame.font.SysFont("comicsans",55)
 fonteMorte = pygame.font.SysFont("arial",120)
-pygame.mixer.music.load("assets/ironsound.mp3")
+pygame.mixer.music.load("recursos/ironsound.mp3")
 
 branco = (255,255,255)
 preto = (0, 0 ,0 )
@@ -83,7 +83,7 @@ def jogar(nome):
         tela.fill(branco)
         tela.blit(fundo, (0,0) )
         #pygame.draw.circle(tela, preto, (posicaoXPersona,posicaoYPersona), 40, 0 )
-        tela.blit( iron, (posicaoXPersona, posicaoYPersona) )
+        tela.blit( personagem, (posicaoXPersona, posicaoYPersona) )
         
         posicaoYMissel = posicaoYMissel + velocidadeMissel
         if posicaoYMissel > 600:

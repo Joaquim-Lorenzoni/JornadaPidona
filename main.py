@@ -9,8 +9,8 @@ relogio = pygame.time.Clock()
 icone  = pygame.image.load("recursos/iconePidao.png")
 personagem = pygame.image.load("recursos/homemPidao.png")
 fundo = pygame.image.load("recursos/florestaPidona.png")
-fundoStart = pygame.image.load("recursos/comecoPidao.png")
-fundoDead = pygame.image.load("recursos/final.png")
+fundoStart = pygame.image.load("recursos/comecoPidao2.png")
+fundoDead = pygame.image.load("recursos/final2.png")
 
 missel = pygame.image.load("recursos/lua.png")
 tamanho = (800,600)
@@ -39,10 +39,10 @@ def jogar(nome):
     posicaoYMissel = -240
     velocidadeMissel = 1
     pontos = 0
-    larguraPersona = 250
-    alturaPersona = 127
-    larguaMissel  = 50
-    alturaMissel  = 250
+    larguraPersona = 224
+    alturaPersona = 250
+    larguaMissel  = 100
+    alturaMissel  = 100
     dificuldade  = 20
 
     while True:

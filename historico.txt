@@ -1,1 +1,1 @@
-{'Marcos': 1, 'Marcos Final': 1, 'MArcãooo': 7, 'Joaquim': 0, 'pidao': 20, 'j': 0, 'l': 0, '': 7}
+{'Marcos': 1, 'Marcos Final': 1, 'MArcãooo': 7, 'Joaquim': 0, 'pidao': 20, 'j': 0, 'l': 0, '': 0}

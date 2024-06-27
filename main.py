@@ -12,37 +12,43 @@ fundo = pygame.image.load("recursos/florestaPidona.png")
 fundoStart = pygame.image.load("recursos/comecoPidao2.png")
 fundoDead = pygame.image.load("recursos/final2.png")
 
-missel = pygame.image.load("recursos/lua.png")
+lua = pygame.image.load("recursos/lua.png")
+bala = pygame.image.load("recursos/balaAntiPidao.png")
 tamanho = (800,600)
-tela = pygame.display.set_mode( tamanho ) 
+tela = pygame.display.set_mode( tamanho )
 pygame.display.set_caption("A Jornada Pidona")
 pygame.display.set_icon(icone)
-missileSound = pygame.mixer.Sound("recursos/missile.wav")
-explosaoSound = pygame.mixer.Sound("recursos/explosao.wav")
+somBala = pygame.mixer.Sound("recursos/bala.mp3")
+finalSound = pygame.mixer.Sound("recursos/somFinal.mp3")
 fonte = pygame.font.SysFont("comicsans",28)
 fonteStart = pygame.font.SysFont("comicsans",55)
 fonteMorte = pygame.font.SysFont("arial",120)
-pygame.mixer.music.load("recursos/ironsound.mp3")
+pygame.mixer.music.load("recursos/somFundo.mp3")
 
 branco = (255,255,255)
 preto = (0, 0 ,0 )
 
 
 def jogar(nome):
-    pygame.mixer.Sound.play(missileSound)
+    pygame.mixer.Sound.play(somBala)
     pygame.mixer.music.play(-1)
     posicaoXPersona = 400
     posicaoYPersona = 300
     movimentoXPersona  = 0
     movimentoYPersona  = 0
-    posicaoXMissel = 400
-    posicaoYMissel = -240
-    velocidadeMissel = 1
+    posicaoXLua = 400
+    posicaoYLua = -240
+    velocidadeLua = 1
+    posicaoXBala = 300
+    posicaoYBala = -140
+    velocidadeBala = 1
     pontos = 0
     larguraPersona = 224
     alturaPersona = 250
-    larguaMissel  = 100
-    alturaMissel  = 100
+    larguaLua  = 100
+    alturaLua  = 100
+    larguaBala  = 19
+    alturaBala  = 100
     dificuldade  = 20
 
     while True:
@@ -57,14 +63,7 @@ def jogar(nome):
                 movimentoXPersona = 0
             elif evento.type == pygame.KEYUP and evento.key == pygame.K_LEFT:
                 movimentoXPersona = 0
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_UP:
-                movimentoYPersona = -10
-            elif evento.type == pygame.KEYDOWN and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 10
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_UP:
-                movimentoYPersona = 0
-            elif evento.type == pygame.KEYUP and evento.key == pygame.K_DOWN:
-                movimentoYPersona = 0
+
                 
         posicaoXPersona = posicaoXPersona + movimentoXPersona            
         posicaoYPersona = posicaoYPersona + movimentoYPersona            
@@ -85,28 +84,44 @@ def jogar(nome):
         #pygame.draw.circle(tela, preto, (posicaoXPersona,posicaoYPersona), 40, 0 )
         tela.blit( personagem, (posicaoXPersona, posicaoYPersona) )
         
-        posicaoYMissel = posicaoYMissel + velocidadeMissel
-        if posicaoYMissel > 600:
-            posicaoYMissel = -240
+        posicaoYLua = posicaoYLua + velocidadeLua
+        if posicaoYLua > 600:
+            posicaoYLua = -240
             pontos = pontos + 1
-            velocidadeMissel = velocidadeMissel + 1
-            posicaoXMissel = random.randint(0,800)
-            pygame.mixer.Sound.play(missileSound)
+            velocidadeLua = velocidadeLua + 1
+            posicaoXLua = random.randint(0,800)
+            pygame.mixer.Sound.play(somBala)
+
+        posicaoYBala = posicaoYBala + velocidadeBala
+        if posicaoYBala > 600:
+            posicaoYBala = -240
+            pontos = pontos + 1
+            velocidadeBala = velocidadeBala + 1
+            posicaoXBala = random.randint(0,800)
+            pygame.mixer.Sound.play(somBala)
             
             
-        tela.blit( missel, (posicaoXMissel, posicaoYMissel) )
-        
+        tela.blit( lua, (posicaoXLua, posicaoYLua) )
+        tela.blit( bala, (posicaoXBala, posicaoYBala) )
+
         texto = fonte.render(nome+"- Pontos: "+str(pontos), True, branco)
         tela.blit(texto, (10,10))
         
         pixelsPersonaX = list(range(posicaoXPersona, posicaoXPersona+larguraPersona))
         pixelsPersonaY = list(range(posicaoYPersona, posicaoYPersona+alturaPersona))
-        pixelsMisselX = list(range(posicaoXMissel, posicaoXMissel + larguaMissel))
-        pixelsMisselY = list(range(posicaoYMissel, posicaoYMissel + alturaMissel))
+
+        pixelsLuaX = list(range(posicaoXLua, posicaoXLua + larguaLua))
+        pixelsLuaY = list(range(posicaoYLua, posicaoYLua + alturaLua))
+        
+        pixelsBalaX = list(range(posicaoXBala, posicaoXBala + larguaBala))
+        pixelsBalaY = list(range(posicaoYBala, posicaoYBala + alturaBala))
         
         #print( len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )   )
-        if  len( list( set(pixelsMisselY).intersection(set(pixelsPersonaY))) ) > dificuldade:
-            if len( list( set(pixelsMisselX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+        if  len( list( set(pixelsLuaY).intersection(set(pixelsPersonaY))) ) > dificuldade:
+            if len( list( set(pixelsLuaX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+                dead(nome, pontos)
+        if len( list( set(pixelsBalaY).intersection(set(pixelsPersonaY))) ) > dificuldade:
+            if len( list( set(pixelsBalaX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
                 dead(nome, pontos)
         
     
@@ -115,9 +130,10 @@ def jogar(nome):
         relogio.tick(60)
 
 
+
 def dead(nome, pontos):
     pygame.mixer.music.stop()
-    pygame.mixer.Sound.play(explosaoSound)
+    pygame.mixer.Sound.play(finalSound)
     
     jogadas  = {}
     try:

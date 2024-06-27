@@ -3,7 +3,6 @@ import random
 import os
 from tkinter import simpledialog
 
-from funcoes import CriaCirculo
 
 pygame.init()
 

@@ -3,6 +3,8 @@ import random
 import os
 from tkinter import simpledialog
 
+from funcoes import CriaCirculo
+
 pygame.init()
 
 relogio = pygame.time.Clock()
@@ -51,16 +53,11 @@ def jogar(nome):
     alturaLua  = 100
     larguaBala  = 19
     alturaBala  = 100
-    larguaMorcego  = 150
-    alturaMorcego  = 80
     dificuldade  = 20
     tamanho = 30
     aumento = 1
     maximo_tamanho = 40
     minimo_tamanho = 25
-    
-    xmorcego = 400
-    direita = True
 
     while True:
         for evento in pygame.event.get():
@@ -76,19 +73,8 @@ def jogar(nome):
                 movimentoXPersona = 0
 
         
-        
-        if direita == True:
-        
-            if xmorcego < 800:
-                xmorcego = xmorcego + 4
-            else:
-                direita = False
-        else:
-            if xmorcego > 0:
-                xmorcego = xmorcego - 4
-            else:
-                direita = True
                 
+
                 
         posicaoXPersona = posicaoXPersona + movimentoXPersona            
         posicaoYPersona = posicaoYPersona + movimentoYPersona            
@@ -108,7 +94,7 @@ def jogar(nome):
         tela.blit(fundo, (0,0) )
         #pygame.draw.circle(tela, preto, (posicaoXPersona,posicaoYPersona), 40, 0 )
         tela.blit( personagem, (posicaoXPersona, posicaoYPersona) )
-        
+
         posicaoYLua = posicaoYLua + velocidadeLua
         if posicaoYLua > 600:
             posicaoYLua = -240
@@ -130,7 +116,9 @@ def jogar(nome):
         if tamanho >= maximo_tamanho or tamanho <= minimo_tamanho:
             aumento = -aumento
         pygame.draw.circle(tela, roxo, (750, 70), tamanho)
-            
+        
+        
+
         tela.blit( lua, (posicaoXLua, posicaoYLua) )
         tela.blit( bala, (posicaoXBala, posicaoYBala) )
 

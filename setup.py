@@ -3,11 +3,11 @@ import cx_Freeze
 executaveis = [ 
                cx_Freeze.Executable(script="main.py", icon="assets/iconePidao.ico") ]
 cx_Freeze.setup(
-    name = "Iron Man",
+    name = "Jornada Pidona",
     options={
         "build_exe":{
             "packages":["pygame"],
-            "include_files":["assets"]
+            "include_files":["recursos"]
         }
     }, executables = executaveis
 )

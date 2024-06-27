@@ -120,8 +120,9 @@ def jogar(nome):
         if  len( list( set(pixelsLuaY).intersection(set(pixelsPersonaY))) ) > dificuldade:
             if len( list( set(pixelsLuaX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
                 dead(nome, pontos)
-        if len( list( set(pixelsBalaY).intersection(set(pixelsPersonaY))) ) > dificuldade:
-            if len( list( set(pixelsBalaX).intersection(set(pixelsPersonaX))   ) )  > dificuldade:
+
+        if len( list( set(pixelsBalaY).intersection(set(pixelsPersonaY))) ) > 10:
+            if len( list( set(pixelsBalaX).intersection(set(pixelsPersonaX))   ) )  > 10:
                 dead(nome, pontos)
         
     

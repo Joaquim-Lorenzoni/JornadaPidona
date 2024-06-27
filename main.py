@@ -11,6 +11,7 @@ personagem = pygame.image.load("recursos/homemPidao.png")
 fundo = pygame.image.load("recursos/florestaPidona.png")
 fundoStart = pygame.image.load("recursos/comecoPidao2.png")
 fundoDead = pygame.image.load("recursos/final2.png")
+morcego = pygame.image.load("recursos/morcego.png")
 
 lua = pygame.image.load("recursos/lua.png")
 bala = pygame.image.load("recursos/balaAntiPidao.png")
@@ -50,11 +51,16 @@ def jogar(nome):
     alturaLua  = 100
     larguaBala  = 19
     alturaBala  = 100
+    larguaMorcego  = 150
+    alturaMorcego  = 80
     dificuldade  = 20
     tamanho = 30
     aumento = 1
     maximo_tamanho = 40
     minimo_tamanho = 25
+    
+    xmorcego = 400
+    direita = True
 
     while True:
         for evento in pygame.event.get():
@@ -69,6 +75,20 @@ def jogar(nome):
             elif evento.type == pygame.KEYUP and evento.key == pygame.K_LEFT:
                 movimentoXPersona = 0
 
+        
+        
+        if direita == True:
+        
+            if xmorcego < 800:
+                xmorcego = xmorcego + 4
+            else:
+                direita = False
+        else:
+            if xmorcego > 0:
+                xmorcego = xmorcego - 4
+            else:
+                direita = True
+                
                 
         posicaoXPersona = posicaoXPersona + movimentoXPersona            
         posicaoYPersona = posicaoYPersona + movimentoYPersona            

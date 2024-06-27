@@ -27,6 +27,7 @@ pygame.mixer.music.load("recursos/somFundo.mp3")
 
 branco = (255,255,255)
 preto = (0, 0 ,0 )
+roxo = (184, 85, 203)
 
 
 def jogar(nome):
@@ -50,6 +51,10 @@ def jogar(nome):
     larguaBala  = 19
     alturaBala  = 100
     dificuldade  = 20
+    tamanho = 30
+    aumento = 1
+    maximo_tamanho = 40
+    minimo_tamanho = 25
 
     while True:
         for evento in pygame.event.get():
@@ -100,6 +105,11 @@ def jogar(nome):
             posicaoXBala = random.randint(0,800)
             pygame.mixer.Sound.play(somBala)
             
+        
+        tamanho += aumento
+        if tamanho >= maximo_tamanho or tamanho <= minimo_tamanho:
+            aumento = -aumento
+        pygame.draw.circle(tela, roxo, (750, 70), tamanho)
             
         tela.blit( lua, (posicaoXLua, posicaoYLua) )
         tela.blit( bala, (posicaoXBala, posicaoYBala) )
